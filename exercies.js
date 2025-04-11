@@ -204,3 +204,66 @@ delay(500, "Loading...")
   .then(() => delay(500, "50% loaded..."))
   .then(() => delay(500, "75% loaded..."))
   .then(() => delay(500, "Loading complete"));
+
+  //HomeWork
+
+// 1. Create the waitForAnyButtonToBeClicked function. It should return a promise.
+// The promise should resolve when any of the buttons passed to the function as an argument are clicked. 
+// The promise should return the clicked button.
+// If any of the buttons passed to the function do not exist, the promise should be rejected.
+
+function waitForAnyButtonToBeClicked(selectors) {
+    return new Promise((resolve, reject) => {
+        const buttons = document.querySelectorAll(selectors.join(","));
+
+        if (buttons.length !== selectors.length) {
+            reject();
+            return;
+        }
+
+        for (let button of buttons) {
+            button.addEventListener("click", () => resolve(button));
+        }
+    });
+}
+
+waitForAnyButtonToBeClicked("#first-button", "#second-button")
+  .then(function(clickedButton) {
+    console.log("A button was clicked", clickedButton);
+  })
+  .catch(function(){
+    console.log("One of the buttons does not exist");
+  })
+
+
+// 2. Write the waitForPasswordsToMatch function that returns a promise.
+// When the passwords in the input match and are not empty strings, the promise s
+// hould resolve. If one of the inputs doesn't exist, the promise should be rejected.
+	
+function waitForPasswordsToMatch(passwordInputSelector, confirmPasswordInputSelector) {
+    return new Promise((resolve, reject) => {
+        const passwordInput = document.querySelector(passwordInputSelector);
+        const confirmPasswordInput = document.querySelector(confirmPasswordInputSelector);
+
+        if(!(passwordInput && confirmPasswordInput)) {
+            reject("One of the inputs does not exist");
+            return;
+        }
+
+        if (passwordInput.value === "" || confirmPasswordInput.value === "") {
+            reject("One of the fields is empty");
+            return;
+        }
+
+        if (passwordInput.value === confirmPasswordInput.value) {
+            resolve()
+        } else {
+            reject("Passwords don't match.");
+        }
+    });
+}
+
+waitForPasswordsToMatch("#password-input","#confirm-password-input")
+  .then(function() {
+    console.log("Passwords match")
+  })
