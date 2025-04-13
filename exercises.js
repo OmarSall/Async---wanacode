@@ -218,7 +218,6 @@ function waitForAnyButtonToBeClicked(selectors) {
 
         if (buttons.length !== selectors.length) {
             reject();
-            return;
         }
 
         for (let button of buttons) {
@@ -247,12 +246,10 @@ function waitForPasswordsToMatch(passwordInputSelector, confirmPasswordInputSele
 
         if(!(passwordInput && confirmPasswordInput)) {
             reject("One of the inputs does not exist");
-            return;
         }
 
         if (passwordInput.value === "" || confirmPasswordInput.value === "") {
             reject("One of the fields is empty");
-            return;
         }
 
         if (passwordInput.value === confirmPasswordInput.value) {
