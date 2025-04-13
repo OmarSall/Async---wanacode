@@ -237,7 +237,7 @@ waitForAnyButtonToBeClicked("#first-button", "#second-button")
 
 
 // 2. Write the waitForPasswordsToMatch function that returns a promise.
-// When the passwords in the input match and are not empty strings, the promise s
+// When the passwords in the input match and are not empty strings, the promise
 // hould resolve. If one of the inputs doesn't exist, the promise should be rejected.
 	
 function waitForPasswordsToMatch(passwordInputSelector, confirmPasswordInputSelector) {
