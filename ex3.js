@@ -12,11 +12,11 @@ const errorDiv = document.getElementById("error");
 
 function getImageElementWhenLoaded(imageUrl) {
   return new Promise((resolve, reject) => {
-    const img = document.createElement("img");
-    img.src = imageUrl;
+    const image = document.createElement("img");
+    image.src = imageUrl;
 
-    img.addEventListener("load", () => resolve(img));
-    img.addEventListener("error", () => reject("Failed to load image."));
+    image.addEventListener("load", () => resolve(image));
+    image.addEventListener("error", () => reject("Failed to load image."));
   });
 }
 
@@ -26,26 +26,27 @@ function showImage(imageUrl) {
   errorDiv.textContent = "";
   loader.style.display = "block";
 
-  getImageElementWhenLoaded(imageUrl).then((newImage) => {
-    newImage.classList.add("visible");
-    imageContainer.appendChild(newImage);
+  getImageElementWhenLoaded(imageUrl)
+    .then((newImage) => {
+      newImage.classList.add("visible");
+      imageContainer.appendChild(newImage);
 
-    if (currentImage) {
+      if (currentImage) {
         currentImage.classList.remove("visible");
         setTimeout(() => {
-            currentImage?.remove();
-            currentImage = newImage;
+          currentImage?.remove();
+          currentImage = newImage;
         }, 1000);
-    } else {
+      } else {
         currentImage = newImage;
-    }
-  })
-  .catch(error => {
-    errorDiv.textContent = error;
-  })
-  .finally( () => {
-    loader.style.display = "none";
-  });
+      }
+    })
+    .catch((error) => {
+      errorDiv.textContent = error;
+    })
+    .finally(() => {
+      loader.style.display = "none";
+    });
 }
 
 images.forEach((imageUrl, index) => {
