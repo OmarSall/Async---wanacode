@@ -212,7 +212,7 @@ delay(500, "Loading...")
 // The promise should return the clicked button.
 // If any of the buttons passed to the function do not exist, the promise should be rejected.
 
-function waitForAnyButtonToBeClicked(selectors) {
+function waitForAnyButtonToBeClicked(...selectors) {
     return new Promise((resolve, reject) => {
         const buttons = document.querySelectorAll(selectors.join(","));
 
